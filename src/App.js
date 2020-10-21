@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
+import GuessedWords from './GuessedWords'
 import './App.css';
 
 function App() {
