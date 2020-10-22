@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { guessWord } from '../actions';
@@ -25,7 +25,10 @@ export class UnconnectedInput extends Component {
         const guessedWord = this.state.currentGuess;
         if (guessedWord && guessedWord.length > 0) {
             this.props.guessWord(guessedWord);
+            this.setState({ currentGuess: '' });
         }
+
+
     }
 
     render () {
