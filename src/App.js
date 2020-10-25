@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import hookActions from './actions/hookActions';
+
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "setSecretWord":
+            return { ...state, secretWord: action.payload };
+
+        default:
+            throw new Error(`Invalid action type: ${action.type}`);
+            break;
+    }
+}
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [error, setError] = useState(false);
-  return (
-    <div data-test="component-app">
-      <h1 data-test="counter-display">
-        The counter is currently&nbsp;
-        <span data-test="count">{count}</span>
-      </h1>
-      <div data-test="error-message" className={`error ${error ? '' : 'hidden'}`}>
-        Error: the counter cannot go below 0
-      </div>
-      <button
-        data-test="increment-button"
-        onClick={() => { if (error) { setError(false); } setCount(count + 1) }}>
-        Increment counter
-      </button>
-      <button
-        data-test="decrement-button"
-        onClick={() => { if (count > 0) { setCount(count - 1) } else { setError(true) } }}>
-        Decrement counter
-      </button>
-    </div>
-  );
+    const [state, dispatch] = React.useReducer(
+        reducer,
+        { secretWord: null }
+    )
+
+    const setSecretWord = (secretWord) => {
+        return dispatch({ type: "setSecretWord", payload: secretWord });
+    }
+
+    React.useEffect(() => {
+        hookActions.getSecretWord(setSecretWord);
+    }, []);
+
+    return (
+        <div data-test="component-app">
+
+        </div>
+    );
 }
 
 export default App;
