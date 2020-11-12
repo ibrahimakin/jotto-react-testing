@@ -1,14 +1,51 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Input from './Input';
+import languageContext from '../contexts/languageContext';
 import { checkProps, findByTestAttr } from '../../test/testUtils';
 
-const setup = (secretWord = 'party') => {
-    return shallow(<Input secretWord={secretWord} />);
+const setup = ({ language, secretWord }) => {
+    //return shallow(<Input secretWord={secretWord} />);
+    language = language || "en";
+    secretWord = secretWord || "party";
+    return mount(
+        <languageContext.Provider value={language} >
+            <Input secretWord={secretWord} />
+        </languageContext.Provider>
+    );
 };
 
+describe('Input placeholder language', () => {
+    test('correctly renders placeholder string in english', () => {
+        const wrapper = setup({ language: "en" });
+        const input = findByTestAttr(wrapper, 'input-box');
+        expect(input.props().placeholder).toBe('enter guess');
+    });
+    test('correctly renders placeholder string in emoji', () => {
+        const wrapper = setup({ language: "emoji" });
+        const input = findByTestAttr(wrapper, 'input-box');
+        expect(input.props().placeholder).toBe('⌨️🤔');
+    });
+});
+
+describe('Submit button language', () => {
+    test('correctly renders submit button string in english', () => {
+        const wrapper = setup({ language: "en" });
+        const button = findByTestAttr(wrapper, 'submit-button');
+        expect(button.text()).toBe('Submit');
+    });
+    test('correctly renders submit button string in emoji', () => {
+        const wrapper = setup({ language: "emoji" });
+        const button = findByTestAttr(wrapper, 'submit-button');
+        expect(button.text()).toBe('🚀');
+    });
+
+});
+
+
+
 test('Input renders without error ', () => {
-    const wrapper = setup();
+    const wrapper = setup({});
     const input = findByTestAttr(wrapper, "component-input");
     expect(input.length).toBe(1);
 });
@@ -24,7 +61,7 @@ describe('state controlled input field', () => {
         mockSetCurrentGuess.mockClear();
         React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
 
-        wrapper = setup();
+        wrapper = setup({});
     });
     test('state updates with value of input box upon change', () => {
 
