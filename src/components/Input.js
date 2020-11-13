@@ -29,6 +29,14 @@ function Input ({ secretWord }) {
                     className="btn btn-primary mb-2"
                     onClick={(evt) => {
                         evt.preventDefault();
+
+                        // TODO: update guessedWords
+
+                        // check against secretWord and update success if nedeed
+                        if (currentGuess === secretWord) {
+                            setSuccess(true);
+                        }
+                        // clear input box
                         setCurrentGuess("");
                     }}>
                     {stringsModule.getStringByLanguage(language, 'submit')}
