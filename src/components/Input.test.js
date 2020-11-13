@@ -4,6 +4,7 @@ import Input from './Input';
 import languageContext from '../contexts/languageContext';
 import successContext from '../contexts/successContext';
 import { checkProps, findByTestAttr } from '../../test/testUtils';
+import guessedWordsContext from '../contexts/guessedWordsContext';
 
 const setup = ({ language, secretWord, success }) => {
     //return shallow(<Input secretWord={secretWord} />);
@@ -14,7 +15,9 @@ const setup = ({ language, secretWord, success }) => {
     return mount(
         <languageContext.Provider value={language} >
             <successContext.SuccessProvider value={[success, jest.fn()]}>
-                <Input secretWord={secretWord} />
+                <guessedWordsContext.GuessedWordsProvider>
+                    <Input secretWord={secretWord} />
+                </guessedWordsContext.GuessedWordsProvider>
             </successContext.SuccessProvider>
         </languageContext.Provider>
     );
