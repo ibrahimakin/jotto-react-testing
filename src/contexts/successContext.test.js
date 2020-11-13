@@ -5,7 +5,7 @@ import successContext from './successContext';
 
 // a functional component that calls useSuccess for our tests
 const FunctionalComponent = () => {
-    const value = successContext.useSuccess();
+    successContext.useSuccess();
     return <div />;
 };
 
