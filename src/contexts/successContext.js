@@ -26,7 +26,7 @@ function SuccessProvider (props) {
     const [success, setSuccess] = React.useState(false);
     const value = React.useMemo(() => [success, setSuccess], [success]);
 
-    return <successContext value={value} {...props} />;
+    return <successContext.Provider value={value} {...props} />;
 }
 
 export default { SuccessProvider, useSuccess };
