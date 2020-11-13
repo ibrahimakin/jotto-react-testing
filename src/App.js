@@ -1,9 +1,12 @@
 import React from 'react';
 import hookActions from './actions/hookActions';
 import languageContext from './contexts/languageContext';
+import successContext from './contexts/successContext';
 
 import Input from './components/Input';
 import LanguagePicker from './components/LanguagePicker';
+import Congrats from './Congrats';
+import GuessedWords from './GuessedWords';
 
 function reducer (state, action) {
     switch (action.type) {
@@ -54,8 +57,12 @@ function App () {
             <h1>Jotto</h1>
             <languageContext.Provider value={state.language}>
                 <LanguagePicker setLanguage={setLanguage} />
-                <Input secretWord={state.secretWord} />
+                <successContext.SuccessProvider>
+                    <Congrats />
+                    <Input secretWord={state.secretWord} />
+                </successContext.SuccessProvider>
                 <h3>{state.secretWord}</h3>
+                {/* <GuessedWords /> */}
             </languageContext.Provider>
         </div>
     );
