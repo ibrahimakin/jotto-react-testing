@@ -23,6 +23,8 @@ app.get('/', (req, res) => {
     res.send(word);
 });
 
-app.listen(3030, () => console.log('Word server listening on port 3030!'));
+
+const port = process.env.PORT || 3030;
+app.listen(port, () => console.log('Word server listening on port 3030!'));
 
 module.exports = app;
