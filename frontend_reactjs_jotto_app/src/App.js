@@ -62,7 +62,6 @@ function App () {
                         <Congrats />
                         <Input secretWord={state.secretWord} />
                     </successContext.SuccessProvider>
-                    <h3>{state.secretWord}</h3>
                     <GuessedWords />
                 </guessedWordsContext.GuessedWordsProvider>
             </languageContext.Provider>
