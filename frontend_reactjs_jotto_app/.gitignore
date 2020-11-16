@@ -1,16 +1,15 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/frontend_reactjs_jotto_app/node_modules
-/backend_random_word_server/node_modules
+/node_modules
 /.pnp
 .pnp.js
 
 # testing
-/frontend_reactjs_jotto_app/coverage
+/coverage
 
 # production
-/frontend_reactjs_jotto_app/build
+/build
 
 # misc
 .DS_Store
